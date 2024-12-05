@@ -1,4 +1,4 @@
-import { apiTest } from "./api"
+import { fetchAstroEntries } from "./content/api"
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
         <div className="text-2xl text-rose-400">bumversal</div>
         <img src="https://drive.google.com/file/d/15b1nLXTbp5VUZ43w_jyArH3_Z6P-Kkj1/view?usp=sharing"/>
         <button onClick={() => {
-          apiTest();
+          fetchAstroEntries();
         }}>api test</button>
       </div>
     </>
