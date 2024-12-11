@@ -9,7 +9,7 @@ const ComingSoon: React.FC = () => {
 
     React.useEffect(() => {
         const loadImages = async () => {
-            const imgs = await fetchAllImages(["Showcase"], 50);
+            const imgs = await fetchAllImages(["Showcase"], 20);
             setImages(imgs);
             setCurrentImage(imgs[Math.floor(Math.random() * imgs.length)]);
         };
