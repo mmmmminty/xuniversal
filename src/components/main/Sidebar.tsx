@@ -8,52 +8,41 @@ export function Sidebar() {
     setExpanded(expanded === section ? null : section);
   };
 
-  const projectList = (
+  const placeholderList = (
     <div className="ml-4 my-3 flex flex-col space-y-1 text-xs text-platinum">
       <span>p1</span>
       <span>p2</span>
       <span>p3</span>
-      <span>p1</span>
-      <span>p2</span>
-      <span>p3</span>
-      <span>p3</span>
-      <span>p1</span>
-      <span>p2</span>
-      <span>p3</span>
-      <span>p3</span>
-      <span>p1</span>
-      <span>p2</span>
-      <span>p3</span>
-      <span>p3</span>
-      <span>p1</span>
-      <span>p2</span>
-      <span>p3</span>
-      <span>p3</span>
-      <span>p1</span>
-      <span>p2</span>
-      <span>p3</span>
-      
+      <span>p4</span>
+      <span>p5</span>
+      <span>p6</span>
+      <span>p7</span>
+      <span>p8</span>
+      <span>p9</span>
+      <span>p10</span>
+      <span>p11</span>
+      <span>p12</span>
     </div>
   );
 
   return (
-    <div className="flex flex-col justify-between mx-40 w-64 h-[50vh] mt-[25vh] mb-[25vh] p-7 border border-platinum bg-eerie">
+    <div className="flex flex-col justify-between min-h-[50vh] mx-[15vw] w-64 h-[50vh] mt-[25vh] mb-[25vh] p-7 border border-platinum bg-eerie">
       <div>
         {/* Title */}
         <div className="mb-6">
           <span className="text-6xl font-serif text-platinum">X</span>
-          <span className="text-1xl font-serif text-platinum">universal</span>
+          <span className="text-1xl font-serif text-platinum"> universal</span>
         </div>
 
         {/* About and Projects */}
         <div className="space-y-2">
-          <h2 className="text-xs uppercase text-platinum">ABOUT</h2>
+          <button className="text-xs uppercase text-platinum">ABOUT</button>
           <div className="flex flex-col">
-            <button className="flex my-4 text-xs text-platinum">RESUME</button>
+            <button className="flex my-4 mb-8 text-xs text-platinum">RESUME</button>
 
             {/* DSLR */}
             <button
-              className="flex ml-2 text-1xl text-platinum italic"
+              className="flex text-1xl text-platinum italic"
               onClick={() => toggleSection("dslr")}
             >
               dslr
@@ -68,8 +57,8 @@ export function Sidebar() {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="overflow-hidden"
                 >
-                  <div className="overflow-y-auto max-h-[15vh]">
-                    {projectList}
+                  <div className="overflow-y-auto max-h-[15vh] scrollbar-thin scrollbar-thumb-platinum scrollbar-track-transparent">
+                    {placeholderList}
                   </div>
                 </motion.div>
               )}
@@ -77,7 +66,7 @@ export function Sidebar() {
 
             {/* Film */}
             <button
-              className="flex ml-2 text-1xl text-platinum italic"
+              className="flex text-1xl text-platinum italic"
               onClick={() => toggleSection("film")}
             >
               film
@@ -90,16 +79,18 @@ export function Sidebar() {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden max-h-[15vh]"
+                  className="overflow-hidden"
                 >
-                  {projectList}
+                  <div className="overflow-y-auto max-h-[15vh] scrollbar-thin scrollbar-thumb-platinum scrollbar-track-transparent">
+                    {placeholderList}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
 
             {/* Astro */}
             <button
-              className="flex ml-2 text-1xl text-platinum italic"
+              className="flex text-1xl text-platinum italic"
               onClick={() => toggleSection("astro")}
             >
               astro
@@ -112,9 +103,11 @@ export function Sidebar() {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden max-h-[15vh]"
+                  className="overflow-hidden"
                 >
-                  {projectList}
+                  <div className="overflow-y-auto max-h-[15vh] scrollbar-thin scrollbar-thumb-platinum scrollbar-track-transparent">
+                    {placeholderList}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
