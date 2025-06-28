@@ -26,7 +26,7 @@ export function Sidebar() {
   );
 
   return (
-    <div className="flex flex-col justify-between min-h-[50vh] mx-[15vw] w-64 h-[50vh] mt-[25vh] mb-[25vh] p-7 border border-platinum bg-eerie">
+    <div className="flex flex-col justify-between justify-items-center-safe mx-[15vw] w-64 h-[100vh] py-[25vh] border border-platinum bg-eerie">
       <div>
         {/* Title */}
         <div className="mb-6">
