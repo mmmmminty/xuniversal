@@ -1,13 +1,16 @@
 import { BrowserRouter, Routes } from "react-router-dom"
-import ComingSoon from "./components/main/ComingSoon"
-import Navbar from "./components/main/Navbar"
+import Sidebar from "./components/main/Sidebar"
+import MainContainer from "./components/main/MainContainer"
+import { CollectionView } from "./components/main/CollectionView"
 
 function App() {
   return (
     <>
       <BrowserRouter>
-          <Navbar />
-          <ComingSoon />
+          <MainContainer>
+            <CollectionView />
+          </MainContainer>
+          <Sidebar/>
           <Routes>  
           </Routes>
       </BrowserRouter>

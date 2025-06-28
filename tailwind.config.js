@@ -8,7 +8,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      'eerie': '#191716',
+      'eerie': '#111111',
       'platinum': '#E9E4E0',
       'dslr': '#D03E16',
       'astro': '#CC2525',
@@ -16,5 +16,6 @@ module.exports = {
     },
   },
   plugins: [
+    require('tailwind-scrollbar')
   ],
 }
