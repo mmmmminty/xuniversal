@@ -17,7 +17,7 @@ export function Navbar() {
                     <div className="border-l border-platinum h-10"></div>
                     <button className="hover:scale-110 transition-transform duration-300"> Collections </button>
                 </div>
-            <div className="h-[5vh] bg-platinum w-full fixed top-[15vh] mix-blend-difference"></div>
+            <div className="h-[5vh] bg-eerie w-full fixed top-[15vh] mix-blend-difference"></div>
             </section>
         </>
     )

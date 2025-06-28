@@ -10,28 +10,28 @@ export function Sidebar() {
 
   const placeholderList = (
     <div className="ml-4 my-3 flex flex-col space-y-1 text-xs text-platinum">
-      <span>p1</span>
-      <span>p2</span>
-      <span>p3</span>
-      <span>p4</span>
-      <span>p5</span>
-      <span>p6</span>
-      <span>p7</span>
-      <span>p8</span>
-      <span>p9</span>
-      <span>p10</span>
-      <span>p11</span>
-      <span>p12</span>
+      <span>coming soon</span>
+      <span>coming soon</span>
+      <span>coming soon</span>
+      <span>coming soon</span>
+      <span>coming soon</span>
+      <span>coming soon</span>
+      <span>coming soon</span>
+      <span>coming soon</span>
+      <span>coming soon</span>
+      <span>coming soon</span>
+      <span>coming soon</span>
+      <span>coming soon</span>
     </div>
   );
 
   return (
-    <div className="flex flex-col justify-between justify-items-center-safe mx-[15vw] w-64 h-[100vh] py-[25vh] border border-platinum bg-eerie">
-      <div>
+    <div className="flex flex-col justify-center mx-[15vw] w-64 h-[100vh] min-h-[800px] border-platinum bg-eerie overflow-hidden z-40 fixed">
+      <div className="flex flex-col m-4 border-platinum md:max-h-[90vh] lg:max-h-[50vh] scrollbar-thin scrollbar-thumb-platinum scrollbar-track-transparent">
         {/* Title */}
         <div className="mb-6">
           <span className="text-6xl font-serif text-platinum">X</span>
-          <span className="text-1xl font-serif text-platinum"> universal</span>
+          <span className="text-1xl font-serif text-platinum italic"> universal</span>
         </div>
 
         {/* About and Projects */}
@@ -116,18 +116,18 @@ export function Sidebar() {
 
         {/* Contact */}
         <div className="mt-8">
-          <h2 className="text-xs my-4 uppercase text-platinum">Contact</h2>
+          <button className="text-xs my-4 uppercase text-platinum">Contact</button>
           <p className="text-xs text-platinum mt-1 italic">
             Copyright © All rights reserved.
           </p>
         </div>
-      </div>
-
-      {/* Share */}
-      <div className="mt-6">
-        <button className="bg-black text-platinum text-xs py-1 rounded-full">
-          SHARE
-        </button>
+      
+        {/* Share */}
+        <div className="mt-6">
+          <button className="bg-black text-platinum text-xs py-1 rounded-full">
+            SHARE
+          </button>
+        </div>
       </div>
     </div>
   );

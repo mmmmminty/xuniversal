@@ -71,16 +71,26 @@ export const fetchAllEntries = async (): Promise<any[]> => {
   return entries;
 }
 
-export const fetchAllImages = async (tags?: string[], quality?: number): Promise<string[]> => {
+export const fetchAllImages = async (
+  tags?: string[],
+  quality?: number
+): Promise<{ url: string; title: string }[]> => {
   let entries = await fetchAllEntries();
 
   // Filter by tags if provided
   if (tags) {
-    entries = entries.filter((entry) => entry.tags ? tags.some((tag) => entry.tags.includes(tag)) : false);
+    entries = entries.filter((entry) =>
+      entry.tags ? tags.some((tag) => entry.tags.includes(tag)) : false
+    );
   }
 
-  // Extract image URLs
-  const images = entries.map((entry) => `${entry.photo.fields.file.url}?fm=webp&q=${quality || 100}` );
+  // Extract image URLs and titles
+  const images = entries.map((entry) => ({
+    url: `${entry.photo.fields.file.url}?fm=webp&q=${quality || 100}`,
+    title: entry.title,
+  }));
+
+  images.sort(() => Math.random() - 0.5);
 
   return images;
-}
+};
