@@ -30,7 +30,7 @@ export function CollectionView() {
           x: {
             repeat: Infinity,
             repeatType: 'loop',
-            duration: 70,
+            duration: 30,
             ease: "linear",
           }
         }
