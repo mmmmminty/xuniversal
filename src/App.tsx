@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Navbar from "./components/main/Navbar"
 import AstroEntry from "./pages/AstroEntry"
@@ -29,6 +30,26 @@ function App() {
             </BrowserRouter>
         </>
     )
+=======
+import { BrowserRouter, Routes } from "react-router-dom"
+import Sidebar from "./components/main/Sidebar"
+import MainContainer from "./components/main/MainContainer"
+import { CollectionView } from "./components/main/CollectionView"
+
+function App() {
+  return (
+    <>
+      <BrowserRouter>
+          <MainContainer>
+            <CollectionView />
+          </MainContainer>
+          <Sidebar/>
+          <Routes>  
+          </Routes>
+      </BrowserRouter>
+    </>
+  )
+>>>>>>> deploy
 }
 
 export default App
