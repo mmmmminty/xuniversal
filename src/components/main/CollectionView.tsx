@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { fetchAllImages } from '../../content/api';
+import { fetchAllImagesByTag } from '../../content/session';
 import '../../index.css';
 
 type ImageData = {
@@ -15,7 +15,7 @@ export function CollectionView() {
 
   useEffect(() => {
     const loadImages = async () => {
-      const imgs = await fetchAllImages(["Showcase"], 50);
+      const imgs = await fetchAllImagesByTag(["Showcase"], 50);
       setImages(imgs);
     };
     loadImages();
