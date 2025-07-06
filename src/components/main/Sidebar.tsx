@@ -70,7 +70,7 @@ export function Sidebar() {
   };
 
   return (
-    <div className="flex flex-col justify-center mx-[15vw] w-64 h-[100vh] min-h-[800px] border-platinum bg-eerie overflow-hidden z-40 fixed">
+    <div className="flex flex-col justify-center mx-[5vw] w-64 h-[100vh] min-h-[800px] border-platinum bg-eerie/95 overflow-hidden z-40 fixed">
       <div className="flex flex-col m-4 border-platinum md:max-h-[90vh] lg:max-h-[50vh] scrollbar-thin scrollbar-thumb-platinum scrollbar-track-transparent">
         {/* Title */}
         <button className="mb-6 flex" onClick={() => {

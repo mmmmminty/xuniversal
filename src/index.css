@@ -7,14 +7,20 @@
     src: url('./assets/fonts/futura/futuramediumbt.ttf') format('truetype');
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 body {
     font-family: 'Times New Roman', sans-serif;
     margin: 0;
     padding: 0;
     border: 0;
     background-color: #111111;
-}
-
-.below-nav {
-    margin-top: 20vh;
 }
