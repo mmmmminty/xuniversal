@@ -1,27 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from 'react-router-dom';
 
 export function Sidebar() {
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [photoCollections, setPhotoCollections] = useState<string[]>([]);
+  const [filmCollections, setFilmCollections] = useState<string[]>([]);
+  const [astroCollections, setAstroCollections] = useState<string[]>([]);
+
+  useEffect(() => {
+    const load = async () => {
+      // const data = await getCollections();
+      // setCollections(data);
+    };
+    load();
+  }, []);
 
   const toggleSection = (section: string) => {
     setExpanded(expanded === section ? null : section);
   };
 
-  const placeholderList = (
+  const navigate = useNavigate();
+  const photoList = (
     <div className="ml-4 my-3 flex flex-col space-y-1 text-xs text-platinum">
-      <span>coming soon</span>
-      <span>coming soon</span>
-      <span>coming soon</span>
-      <span>coming soon</span>
-      <span>coming soon</span>
-      <span>coming soon</span>
-      <span>coming soon</span>
-      <span>coming soon</span>
-      <span>coming soon</span>
-      <span>coming soon</span>
-      <span>coming soon</span>
-      <span>coming soon</span>
+      {photoCollections.map((title) => (
+        <button
+          key={title}
+          onClick={() => navigate(`/collection/${encodeURIComponent(title)}`)}
+          className="hover:underline text-left"
+        >
+          {title}
+        </button>
+      ))}
     </div>
   );
 

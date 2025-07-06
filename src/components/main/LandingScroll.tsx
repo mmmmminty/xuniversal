@@ -8,7 +8,7 @@ type ImageData = {
   title: string;
 };
 
-export function CollectionView() {
+export function LandingScroll() {
   const [images, setImages] = useState<ImageData[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
@@ -70,4 +70,4 @@ export function CollectionView() {
   );
 }
 
-export default CollectionView;
+export default LandingScroll;

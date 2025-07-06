@@ -1,52 +1,36 @@
-import { fetchAllCollections } from "./collections";
-import { fetchAllEntries } from "./entries";
-
-export interface SessionData {
-  entries: any[],
-  collections: any[]
-}
-
-export const fetchAllandStore = async (): Promise<SessionData> => {
-  const cached = sessionStorage.getItem('sessionData');
-  if (cached) {
-    const parsed = JSON.parse(cached);
-    console.log("Found data in session storage.");
-    console.log(parsed);
-    return parsed;
-  }
-
-  const entries = await fetchAllEntries();
-  const collections = await fetchAllCollections();
-  const sessionData: SessionData = {
-    entries,
-    collections
-  }
-
-  sessionStorage.setItem('sessionData', JSON.stringify(sessionData));
-  console.log("Fetched and stored data.");
-  console.log(sessionData);
-  return sessionData;
-}
+import { fetchContent } from "./api";
+import {
+  TypeAstroEntryFields,
+  TypeFilmEntryFields,
+  TypePhotoEntryFields
+} from "./auto";
 
 export const fetchAllImagesByTag = async (
   tags?: string[],
   quality?: number
 ): Promise<{ url: string; title: string }[]> => {
-  let entries = (await fetchAllandStore()).entries;
+  // Fetch all three entry types
+  const astroEntries = await fetchContent<TypeAstroEntryFields>("astroEntry");
+  const filmEntries  = await fetchContent<TypeFilmEntryFields>("filmEntry");
+  const photoEntries = await fetchContent<TypePhotoEntryFields>("photoEntry");
 
-  // Filter by tags if provided
+  // Combine into single list
+  let entries = [...astroEntries, ...filmEntries, ...photoEntries];
+
   if (tags) {
     entries = entries.filter((entry) =>
-      entry.tags ? tags.some((tag) => entry.tags.includes(tag)) : false
+      entry.tags ? tags.some(tag => tags.includes(tag)) : false
     );
   }
 
-  // Extract image URLs and titles
+  // Extract images - Must use any as TS doesn't know the AssetLink is fully resolved.
   const images = entries.map((entry) => ({
-    url: `${entry.photo.fields.file.url}?fm=webp&q=${quality || 50}`,
-    title: entry.title,
+    url: `https:${(entry.photo as any).fields.file.url}?fm=webp&q=${quality ?? 50}`,
+    title: new String(entry.title) as string
   }));
 
+
+  // Shuffle
   images.sort(() => Math.random() - 0.5);
 
   return images;
