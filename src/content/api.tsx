@@ -5,6 +5,15 @@ const MAX_CACHE_AGE = 60 * 60 * 1000;
 const SPACE_ID = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
 const ACCESS_TOKEN = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
 
+export type SessionContent = {
+  astroCollections: TypeAstroCollectionFields[],
+  astroEntries: TypeAstroEntryFields[],
+  filmCollections: TypeFilmCollectionFields[],
+  filmEntries: TypeFilmEntryFields[],
+  photoCollections: TypePhotoCollectionFields[],
+  photoEntries: TypePhotoEntryFields[]
+}
+
 export const client = createClient({
   space: SPACE_ID,
   accessToken: ACCESS_TOKEN,
@@ -54,13 +63,20 @@ export const fetchContent = async <T,>(contentType: string): Promise<T[]> => {
   return content;
 };
 
-export const fetchAllContent = async (): Promise<[]> => {
-  await fetchContent<TypeAstroCollectionFields>("astroCollection");
-  await fetchContent<TypeFilmCollectionFields>("filmCollection");
-  await fetchContent<TypePhotoCollectionFields>("photoCollection");
-  await fetchContent<TypeAstroEntryFields>("astroEntry");
-  await fetchContent<TypeFilmEntryFields>("filmEntry");
-  await fetchContent<TypePhotoEntryFields>("photoEntry");
+export const fetchAllContent = async (): Promise<SessionContent> => {
+  const astroCollections = await fetchContent<TypeAstroCollectionFields>("astroCollection");
+  const filmCollections = await fetchContent<TypeFilmCollectionFields>("filmCollection");
+  const photoCollections = await fetchContent<TypePhotoCollectionFields>("photoCollection");
+  const astroEntries = await fetchContent<TypeAstroEntryFields>("astroEntry");
+  const filmEntries = await fetchContent<TypeFilmEntryFields>("filmEntry");
+  const photoEntries = await fetchContent<TypePhotoEntryFields>("photoEntry");
 
-  return [];
+  return {
+    astroCollections,
+    astroEntries,
+    filmCollections,
+    filmEntries,
+    photoCollections,
+    photoEntries,
+  } as SessionContent;
 }
