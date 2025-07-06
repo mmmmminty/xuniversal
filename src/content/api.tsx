@@ -1,4 +1,4 @@
-import { createClient } from "contentful";
+import { createClient, EntryFieldTypes } from "contentful";
 import { TypeAstroCollectionFields, TypeAstroEntryFields, TypeFilmCollectionFields, TypeFilmEntryFields, TypePhotoCollectionFields, TypePhotoEntryFields } from "./auto";
 
 const MAX_CACHE_AGE = 60 * 60 * 1000; 
@@ -80,3 +80,43 @@ export const fetchAllContent = async (): Promise<SessionContent> => {
     photoEntries,
   } as SessionContent;
 }
+
+export const fetchContentByTitle = async <T extends { title: EntryFieldTypes.Symbol }>(title: string, contentType: string): Promise<T| null> => {
+  const content = await fetchContent<T>(contentType);
+  const found = content.find((c) =>{
+    const converted = encodeURIComponent((new String(c.title) as string).toLowerCase().replace(new RegExp(" ", "g"), "-"));
+    return converted == title;
+  });
+  return found ?? null;
+};
+
+export const fetchAllImagesByTag = async (
+  tags?: string[],
+  quality?: number
+): Promise<{ url: string; title: string }[]> => {
+  // Fetch all three entry types
+  const astroEntries = await fetchContent<TypeAstroEntryFields>("astroEntry");
+  const filmEntries  = await fetchContent<TypeFilmEntryFields>("filmEntry");
+  const photoEntries = await fetchContent<TypePhotoEntryFields>("photoEntry");
+
+  // Combine into single list
+  let entries = [...astroEntries, ...filmEntries, ...photoEntries];
+
+  if (tags) {
+    entries = entries.filter((entry) =>
+      entry.tags ? tags.some(tag => tags.includes(tag)) : false
+    );
+  }
+
+  // Extract images - Must use any as TS doesn't know the AssetLink is fully resolved.
+  const images = entries.map((entry) => ({
+    url: `https:${(entry.photo as any).fields.file.url}?fm=webp&q=${quality ?? 50}`,
+    title: new String(entry.title) as string
+  }));
+
+
+  // Shuffle
+  images.sort(() => Math.random() - 0.5);
+
+  return images;
+};

@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom"
-import Sidebar from "./components/main/Sidebar"
-import MainContainer from "./components/main/MainContainer"
-import { LandingScroll } from "./components/main/LandingScroll"
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
+import Sidebar from "./components/main/Sidebar";
+import MainContainer from "./components/main/MainContainer";
+import { LandingScroll } from "./components/main/LandingScroll";
 import { useEffect } from "react";
 import { fetchAllContent } from "./content/api";
 import ViewCollection from "./pages/ViewCollection";
@@ -13,23 +13,29 @@ function App() {
       await fetchAllContent();
     };
     load();
-  }, []); 
+  }, []);
 
   function CollectionRouteHandler() {
-    const { collectionTitle } = useParams<{ collectionTitle: string }>();
-    return <ViewCollection title={collectionTitle || ""} />;
+    const { type, collectionTitle } = useParams<{
+      type: string;
+      collectionTitle: string;
+    }>();
+    return <ViewCollection type={type || ""} title={collectionTitle || ""} />;
   }
 
   function EntryRouteHandler() {
-    const { entryTitle } = useParams<{ entryTitle: string }>();
-    return <ViewEntry title={entryTitle || ""} />;
+    const { type, entryTitle } = useParams<{
+      type: string;
+      entryTitle: string;
+    }>();
+    return <ViewEntry type={type || ""} title={entryTitle || ""} />;
   }
 
   return (
     <>
       <BrowserRouter>
-          <Sidebar/>
-          <Routes>
+        <Sidebar />
+        <Routes>
           <Route
             path="/"
             element={
@@ -39,7 +45,7 @@ function App() {
             }
           />
           <Route
-            path="collections/:collectionTitle"
+            path=":type/collection/:collectionTitle"
             element={
               <MainContainer>
                 <CollectionRouteHandler />
@@ -47,7 +53,7 @@ function App() {
             }
           />
           <Route
-            path="photos/:entryTitle"
+            path=":type/photo/:entryTitle"
             element={
               <MainContainer>
                 <EntryRouteHandler />
@@ -57,7 +63,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

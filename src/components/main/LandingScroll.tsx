@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { fetchAllImagesByTag } from '../../content/session';
+import { fetchAllImagesByTag } from '../../content/api';
 import '../../index.css';
 
 type ImageData = {

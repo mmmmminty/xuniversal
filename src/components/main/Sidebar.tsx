@@ -32,7 +32,7 @@ export function Sidebar() {
   };
 
   const navigate = useNavigate();
-  const expandedList = (collection: string[], entries: string[]) => {
+  const expandedList = (collection: string[], entries: string[], type: string) => {
     return (
       <div className="ml-4 my-3 flex flex-col space-y-1 text-xs text-platinum">
         <a className="text-1xl -ml-2 italic"> collections </a>
@@ -41,7 +41,10 @@ export function Sidebar() {
         {collection.map((title) => (
           <button
             key={title}
-            onClick={() => navigate(`/collection/${encodeURIComponent(title.toLowerCase().replace(new RegExp(" ", "g"), "-"))}`)}
+            onClick={() => {
+              setExpanded(null);
+              navigate(`${type}/collection/${encodeURIComponent(title.toLowerCase().replace(new RegExp(" ", "g"), "-"))}`)
+            }}
             className="text-left"
           >
             {title.toLowerCase()}
@@ -53,7 +56,10 @@ export function Sidebar() {
         {entries.map((title) => (
           <button
             key={title}
-            onClick={() => navigate(`/photo/${encodeURIComponent(title.toLowerCase().replace(new RegExp(" ", "g"), "-"))}`)}
+            onClick={() => {
+              setExpanded(null);
+              navigate(`${type}/photo/${encodeURIComponent(title.toLowerCase().replace(new RegExp(" ", "g"), "-"))}`)
+            }}
             className="text-left"
           >
             {title.toLowerCase()}
@@ -67,7 +73,10 @@ export function Sidebar() {
     <div className="flex flex-col justify-center mx-[15vw] w-64 h-[100vh] min-h-[800px] border-platinum bg-eerie overflow-hidden z-40 fixed">
       <div className="flex flex-col m-4 border-platinum md:max-h-[90vh] lg:max-h-[50vh] scrollbar-thin scrollbar-thumb-platinum scrollbar-track-transparent">
         {/* Title */}
-        <button className="mb-6 flex" onClick={() => navigate('/')}>
+        <button className="mb-6 flex" onClick={() => {
+          navigate('/');
+          setExpanded(null);
+        }}>
           <span className="text-6xl font-serif text-platinum self-end">X</span>
           <span className="text-1xl font-serif text-platinum italic self-end ml-1 mb-[2px]"> universal</span>
         </button>
@@ -99,7 +108,7 @@ export function Sidebar() {
                   className="overflow-hidden"
                 >
                   <div className="overflow-y-auto max-h-[15vh] scrollbar-thin scrollbar-thumb-platinum scrollbar-track-transparent">
-                    {expandedList(photoCollections, photoEntries)}
+                    {expandedList(photoCollections, photoEntries, 'dslr')}
                   </div>
                 </motion.div>
               )}
@@ -123,7 +132,7 @@ export function Sidebar() {
                   className="overflow-hidden"
                 >
                   <div className="overflow-y-auto max-h-[15vh] scrollbar-thin scrollbar-thumb-platinum scrollbar-track-transparent">
-                    {expandedList(filmCollections, filmEntries)}
+                    {expandedList(filmCollections, filmEntries, 'film')}
                   </div>
                 </motion.div>
               )}
@@ -147,7 +156,7 @@ export function Sidebar() {
                   className="overflow-hidden"
                 >
                   <div className="overflow-y-auto max-h-[15vh] scrollbar-thin scrollbar-thumb-platinum scrollbar-track-transparent">
-                    {expandedList(astroCollections, astroEntries)}
+                    {expandedList(astroCollections, astroEntries, 'astro')}
                   </div>
                 </motion.div>
               )}

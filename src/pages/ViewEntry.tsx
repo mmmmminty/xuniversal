@@ -1,14 +1,12 @@
 type Props = {
+  type: string;
   title: string;
 };
 
-export function ViewEntry({ title }: Props) {
+export default function ViewEntry({ type, title }: Props) {
   return (
     <div>
-      <h1 className="text-2xl font-bold">{title}</h1>
-      {/* your entry content */}
+      <h1 className="text-2xl font-bold">{type.toUpperCase()} - {title}</h1>
     </div>
   );
 }
-
-export default ViewEntry;
